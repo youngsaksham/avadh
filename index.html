@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Shree Interprises 
+        </title>
+    </head>
+    <body>
+        <h1>
+            Admin
+        </h1>
+        Moon Chips <input id="MoonChipsBox" type="text"></input> <br></br>
+        ABCD <input id="ABCDBox" type="text"></input> <br></br>
+        Salted Pipe <input id="SaltedPipeBox" type="text"></input> <br></br>
+        Moon Chips Tomato <input id="MoonChipsTomatoBox" type="text"></input> <br></br>
+        Small Cup Tomato <input id="SmallCupTomatoBox" type="text"></input> <br></br>
+        Plan <input id="PlanBox" type="text"></input> <br></br>
+         <br></br>
+        <button id="insert">INSERT</button>
+        <button id="select">SELECT</button>
+        <button id="update">UPDATE</button>
+        <button id="delete">DELETE</button>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCXNgxTyRrRTUTqk-r6EkLFTbkDhDUP60A",
+    authDomain: "avadh-e1931.firebaseapp.com",
+    projectId: "avadh-e1931",
+    storageBucket: "avadh-e1931.appspot.com",
+    messagingSenderId: "175882532886",
+    appId: "1:175882532886:web:103a987bc9eafa8e1c5d37"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script>
+
+  //    .   .   .   .   .   .   .   .  Ready Data  .   .   .   .   .   .   .   .   //
+
+var MoonChipsV,ABCDV,SaltedPipeV,MoonChipsTomatoV,SmallCupTomatoV,PlanV;
+
+
+function Ready(){
+   
+    PlanV = document.getElementById("PlanBox").value;
+    MoonChipsV = document.getElementById("MoonChipsBox").value;
+    ABCDV = document.getElementById("ABCDBox").value;
+    SaltedPipeV = document.getElementById("SaltedPipeBox").value;
+    MoonChipsTomatoV = document.getElementById("MoonChipsTomatoBox").value;
+    SmallCupTomatoV = document.getElementById("SmallCupTomatoBox").value;
+
+}
+
+//    .   .   .   .   .   .   .   .  Insert Data  .   .   .   .   .   .   .   .   //
+document.getElementById("insert").onclick = function(){
+    Ready();
+    firebase.database().ref("avadh/").set({
+Plan:PlanV,
+MoonChips:MoonChipsV,
+ABCD:ABCDV,
+SaltedPipe:SaltedPipeV,
+MoonChipsTomato:MoonChipsTomatoV,
+SmallCupTomato:SmallCupTomatoV
+    });
+}
+
+//    .   .   .   .   .   .   .   .  select Data  .   .   .   .   .   .   .   .   //
+document.getElementById("select").onclick = function(){
+    Ready();
+    firebase.database().ref("avadh/").on("value",function(snapshot){
+        document.getElementById("PlanBox").value = snapshot.val().Plan;
+        document.getElementById("MoonChipsBox").value = snapshot.val().MoonChips;
+        document.getElementById("ABCDBox").value = snapshot.val().ABCD;
+        document.getElementById("SaltedPipeBox").value = snapshot.val().SaltedPipe;
+        document.getElementById("MoonChipsTomatoBox").value = snapshot.val().MoonChipsTomato;
+        document.getElementById("SmallCupTomatoBox").value = snapshot.val().SmallCupTomato;
+      });
+}
+
+//    .   .   .   .   .   .   .   .  update Data  .   .   .   .   .   .   .   .   //
+document.getElementById("update").onclick = function(){
+    Ready();
+    firebase.database().ref("avadh/").update({
+        Plan:PlanV,
+MoonChips:MoonChipsV,
+ABCD:ABCDV,
+SaltedPipe:SaltedPipeV,
+MoonChipsTomato:MoonChipsTomatoV,
+SmallCupTomato:SmallCupTomatoV
+    });
+}
+
+//    .   .   .   .   .   .   .   .  delete Data  .   .   .   .   .   .   .   .   //
+document.getElementById("delete").onclick = function(){
+    Ready();
+    firebase.database().ref("avadh/").remove();
+}
+
+</script>
+    </body>
+</html>
